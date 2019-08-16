@@ -8,10 +8,6 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Input from '@material-ui/core/Input';
 
 
-
-
-
-
 class FixedContainer extends React.Component {
 
     constructor (props) {
@@ -41,7 +37,7 @@ class FixedContainer extends React.Component {
             fetch(`https://gorest.co.in/public-api/users?name=${userName}&page=${page}`,{
             method:'GET',
             headers: {
-                'Authorization': "add your key here",//eg:  "Bearer API_KEY"
+                'Authorization': " *********  add toke here  ****", //eg: "Bearer KEY"
                 'Content-Type': 'application/json',
                 'Accept':"application/json"
             },
@@ -88,7 +84,7 @@ class FixedContainer extends React.Component {
         console.log(this.goTopage)
     }
 
-
+    
     validateFetchParams (userName){
         let nameVlaidation =false
         if(userName && userName.trim() != "" && userName.length > 0){
