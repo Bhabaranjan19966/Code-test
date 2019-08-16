@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Card from './Card'
 
@@ -24,12 +23,12 @@ export default function CenteredGrid(props) {
     <div className={classes.root}>
       <Grid container spacing={4}>
       {props.userList.map( (userData , index) => {          
-          return (
-              <Grid item xs={9} sm={6} md ={4} lg={4} key={index}>
-                     <Card key= {index} userData={userData}/>         
-              </Grid>
+        return (
+            <Grid item xs={9} sm={6} md ={4} lg={4} key={index}>
+                <Card key= {index} userData={userData}/>         
+            </Grid>
           )
-           })}
+      })}
         
         
       </Grid>

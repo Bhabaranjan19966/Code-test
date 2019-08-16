@@ -30,15 +30,19 @@ const useStyles = makeStyles({
 
 export default function CustomizedInputBase(props) {
   const classes = useStyles();
-  let value;
-  
+  var value;
   const inputChanged =(e) =>{
-      console.log('input changed',e, e.which)
       value = e.target.value;
   }
 
   const makeCall =()=>{
+    if(value){
       props.fetchUser(value,1);
+    }else{
+      value = document.getElementById('inputElement').value;
+      props.fetchUser(value,1);
+    }
+     
   }
   
   return (
@@ -48,6 +52,7 @@ export default function CustomizedInputBase(props) {
         placeholder="Enter Your Name"
         onChange = {(e) => inputChanged(e)}
         inputProps={{ 'aria-label': 'search google maps' }}
+        id = "inputElement"
       />
       <Divider className={classes.divider} />
       <IconButton className={classes.iconButton} onClick={makeCall} aria-label="search">

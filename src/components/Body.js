@@ -1,11 +1,10 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
-import Finder from './finder'
-import Grid from './ResultGrid'
+import Finder from './SearchBar'
+import Grid from './ImageGrid'
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import TextField from '@material-ui/core/TextField';
 import Input from '@material-ui/core/Input';
 
 
@@ -29,6 +28,12 @@ class FixedContainer extends React.Component {
         this.setGotoValue =this.setGotoValue.bind(this)
     }
 
+    /**
+     * @description : this function will fetch user data with the given parameters
+     * @param {String} Name 
+     * @param {Number} page 
+     */
+
     fetchUsers (userName, page) {
         console.log(page, "this is fetch users");
        
@@ -36,7 +41,7 @@ class FixedContainer extends React.Component {
             fetch(`https://gorest.co.in/public-api/users?name=${userName}&page=${page}`,{
             method:'GET',
             headers: {
-                'Authorization': "Bearer ",
+                'Authorization': "add your key here",//eg:  "Bearer API_KEY"
                 'Content-Type': 'application/json',
                 'Accept':"application/json"
             },
@@ -53,7 +58,10 @@ class FixedContainer extends React.Component {
                 
             }, ()=>{console.log("state changed",this.state)} );
             } else{
-
+                this.setState({
+                    list:[],
+                    statusCode: res._meta.message
+                },alert(res._meta.message))
             }
             
 
@@ -73,12 +81,13 @@ class FixedContainer extends React.Component {
             event.target.value = "";
         }
         if(event.target.value < 0){
-            alert('Enter a non-negative number');
+            alert('should be a non-negative number');
             event.target.value = "";
         }
         this.goTopage = event.target.value
         console.log(this.goTopage)
     }
+
 
     validateFetchParams (userName){
         let nameVlaidation =false
@@ -140,6 +149,8 @@ class FixedContainer extends React.Component {
 
               </div>) 
               : "" }
+
+              {this.state.statusCode ? (<div> {this.state.statusCode}</div>) : ""}
 
             </React.Fragment>
 

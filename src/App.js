@@ -1,8 +1,7 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import AppBar from './components/AppBar'
-import Body from './components/container'
+import Body from './components/Body'
 function App() {
   const [value,setValues] = React.useState({
     name:"",
