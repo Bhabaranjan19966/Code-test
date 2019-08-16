@@ -13,7 +13,7 @@ class FixedContainer extends React.Component {
     constructor (props) {
 
         super(props)
-        this.goTopage = 1;
+        this.goTopage = "";
         this.state ={
             list: [],
             renderList: false
@@ -73,10 +73,10 @@ class FixedContainer extends React.Component {
 
     setGotoValue (event){
         if(event.target.value > this.state.totalPage){
-            alert('Exceedds total avilable page');
+            alert('Please try a number less than: ' + (this.state.totalPage+1));
             event.target.value = "";
         }
-        if(event.target.value < 0){
+        if(event.target.value!="" && event.target.value <= 0){
             alert('should be a non-negative number');
             event.target.value = "";
         }
@@ -86,11 +86,19 @@ class FixedContainer extends React.Component {
 
     
     validateFetchParams (userName){
-        let nameVlaidation =false
+        let nameVlaidation =false;
         if(userName && userName.trim() != "" && userName.length > 0){
             nameVlaidation = true;
         }
-        return nameVlaidation;
+        return nameVlaidation
+    }
+
+    navigateToPage(userName, page){
+        if(page == "") {
+            alert("enter a valid page number");
+        }else{
+            this.fetchUsers(userName , page)
+        }
     }
 
     render () {
@@ -132,7 +140,7 @@ class FixedContainer extends React.Component {
                     'aria-label': 'description',
                  }}/>
                 
-                <Button color="primary" size="small" onClick = { () =>this.fetchUsers(this.state.name, this.goTopage)}>
+                <Button color="primary" size="small" onClick = { () =>this.navigateToPage(this.state.name, this.goTopage)}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"/></svg>
                 </Button> 
                 </div>
